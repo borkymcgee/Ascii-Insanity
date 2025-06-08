@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val binaryHint = findViewById<TextView>(R.id.binaryHint)    //the binary of displayedAscii (for easier debugging)
         val displayedCurrentGuess = findViewById<TextView>(R.id.displayedCurrentGuess)  //the character the user's current guess corresponds to
         
-        var asciiToGuess = 'f'  //hardcoded guess for now
+        var asciiToGuess = (0..128).random().toChar()  //random ascii character guess
         var currentGuess = 0.toChar()   //set the current guess to 0
         
         fun updateNumbers() {
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 //if the guess is now correct, pop a toast and reset for another char at random
                 if(currentGuess == asciiToGuess){
                     //congratulate user
-                    Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show()
                     //reset target
                     asciiToGuess = (0..128).random().toChar()
                     //reset guess
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     updateNumbers()
                     
                     //reset buttons
-                    for(i in 0..7){
+                    for(i: Int in 0..7){
                         buttons[i].setText("0")
                     }
                 }
