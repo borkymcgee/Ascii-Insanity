@@ -3,11 +3,13 @@ package com.example.asciiinsanity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +30,12 @@ class MainActivity : AppCompatActivity() {
         //put buttons into array for programmatic assignment
         val buttons:Array<Button> = arrayOf(button0, button1, button2, button3, button4, button5, button6, button7)
 
+        val asciiTable = findViewById<ImageView>(R.id.asciiTable)    //the character the user is trying to guess
         val displayedAscii = findViewById<TextView>(R.id.displayedAscii)    //the character the user is trying to guess
         val binaryHint = findViewById<TextView>(R.id.binaryHint)    //the binary of displayedAscii (for easier debugging)
         val displayedCurrentGuess = findViewById<TextView>(R.id.displayedCurrentGuess)  //the character the user's current guess corresponds to
         
-        var asciiToGuess = (0..128).random().toChar()  //random ascii character guess
+        var asciiToGuess = (33..126).random().toChar()  //random ascii character guess
         var currentGuess = 0.toChar()   //set the current guess to 0
         
         fun updateNumbers() {
@@ -45,6 +48,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         updateNumbers()
+
+        //toggle visibility of ascii table when current guess is tapped
+        displayedCurrentGuess.setOnClickListener(){
+            asciiTable.isVisible = !asciiTable.isVisible
+        }
 
         //iterate through buttons, flipping bits if the button has been pressed
         for(i in 0..7){
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     //congratulate user
                     Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show()
                     //reset target
-                    asciiToGuess = (0..128).random().toChar()
+                    asciiToGuess = (33..126).random().toChar()
                     //reset guess
                     currentGuess = 0.toChar()
                     
@@ -72,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                     for(i: Int in 0..7){
                         buttons[i].setText("0")
                     }
+                    //if table was visible, dismiss it
+                    asciiTable.isVisible = false
                 }
             }
         }

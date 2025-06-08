@@ -9,9 +9,10 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="88dp"
         android:text="Ascii Insanity"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/white"
@@ -120,7 +121,7 @@
         android:layout_height="wrap_content"
         android:text="binary hint"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/UpperNibble"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,5 +138,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binaryHint" />
+
+    <ImageView
+        android:id="@+id/asciiTable"
+        android:layout_width="407dp"
+        android:layout_height="287dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396"
+        app:srcCompat="@drawable/table"
+        tools:layout_editor_absoluteX="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
