@@ -43,8 +43,10 @@ class MainActivity : AppCompatActivity() {
             displayedAscii.setText(asciiToGuess.toString())
             //update the hint text
             binaryHint.setText(asciiToGuess.code.toString(2).padStart(8,'0'))
+            //update the current guessed character
+            //displayedCurrentGuess.setText(currentGuess.toChar().toString())
             //update the current guess text in binary (for input debugging)
-            displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0'))
+            displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0') + " (" + currentGuess.toChar().toString() + ")")
         }
 
         updateNumbers()
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 //set text on button to reflect flipped bit
                 buttons[i].setText(((currentGuess.code shr i) and 1).toString())
                 //update current guess display
-                displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0'))
+                updateNumbers()
 
                 //if the guess is now correct, pop a toast and reset for another char at random
                 if(currentGuess == asciiToGuess){
