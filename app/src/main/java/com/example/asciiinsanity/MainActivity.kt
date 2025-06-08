@@ -3,6 +3,7 @@ package com.example.asciiinsanity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,17 +31,20 @@ class MainActivity : AppCompatActivity() {
         val displayedAscii = findViewById<TextView>(R.id.displayedAscii)    //the character the user is trying to guess
         val binaryHint = findViewById<TextView>(R.id.binaryHint)    //the binary of displayedAscii (for easier debugging)
         val displayedCurrentGuess = findViewById<TextView>(R.id.displayedCurrentGuess)  //the character the user's current guess corresponds to
-
-
+        
         var asciiToGuess = 'f'  //hardcoded guess for now
         var currentGuess = 0.toChar()   //set the current guess to 0
+        
+        fun updateNumbers() {
+            //update the target text
+            displayedAscii.setText(asciiToGuess.toString())
+            //update the hint text
+            binaryHint.setText(asciiToGuess.code.toString(2).padStart(8,'0'))
+            //update the current guess text in binary (for input debugging)
+            displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0'))
+        }
 
-        //update the display values
-        displayedAscii.setText(asciiToGuess.toString())
-        binaryHint.setText(asciiToGuess.code.toString(2).padStart(8,'0'))
-
-        //display current guess in binary for input debugging
-        displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0'))
+        updateNumbers()
 
         //iterate through buttons, flipping bits if the button has been pressed
         for(i in 0..7){
@@ -51,6 +55,24 @@ class MainActivity : AppCompatActivity() {
                 buttons[i].setText(((currentGuess.code shr i) and 1).toString())
                 //update current guess display
                 displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0'))
+
+                //if the guess is now correct, pop a toast and reset for another char at random
+                if(currentGuess == asciiToGuess){
+                    //congratulate user
+                    Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show();
+                    //reset target
+                    asciiToGuess = (0..128).random().toChar()
+                    //reset guess
+                    currentGuess = 0.toChar()
+                    
+                    //make text reflect changes
+                    updateNumbers()
+                    
+                    //reset buttons
+                    for(i in 0..7){
+                        buttons[i].setText("0")
+                    }
+                }
             }
         }
 
