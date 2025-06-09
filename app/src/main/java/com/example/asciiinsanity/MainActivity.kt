@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         gameModeButton.setOnClickListener(){
             if(gameMode >= 2) gameMode = 0
             else gameMode++
+            asciiToGuess = randomTarget()  //random ascii character guess
 
             if(difficulty == 2) difficulty = 1
 
@@ -111,10 +112,10 @@ class MainActivity : AppCompatActivity() {
         gameDifficultyButton.setOnClickListener(){
             if(difficulty >= 1){
                 difficulty = 0
-                asciiToGuess = randomTarget()  //random ascii character guess
             } else {
                 difficulty++
             }
+            asciiToGuess = randomTarget()  //random ascii character guess
 
             updateNumbers()
         }
