@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             //update the current guessed character
             //displayedCurrentGuess.setText(currentGuess.toChar().toString())
             //update the current guess text in binary (for input debugging)
-            displayedCurrentGuess.setText(currentGuess.code.toString(2).padStart(8,'0') + " (" + currentGuess.toChar().toString() + ")")
+            displayedCurrentGuess.setText("0b" + currentGuess.code.toString(2).padStart(8,'0') + " 0x" + currentGuess.code.toInt().toHexString().substring(6) + " \'" + charToAscii(currentGuess) + "\'")
         }
 
         updateNumbers()
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         gameDifficultyButton.setOnClickListener(){
             if(difficulty >= 1){
                 difficulty = 0
-                var asciiToGuess = randomTarget()  //random ascii character guess
+                asciiToGuess = randomTarget()  //random ascii character guess
             } else {
                 difficulty++
             }
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 //if the guess is now correct, pop a toast and reset for another char at random
                 if(currentGuess == asciiToGuess){
                     //congratulate user
-                    Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show()
                     //reset target
                     asciiToGuess = randomTarget()
                     //reset guess
