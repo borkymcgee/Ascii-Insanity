@@ -29,11 +29,12 @@
         android:text="A"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/UpperNibble"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.417" />
 
     <LinearLayout
         android:id="@+id/UpperNibble"
@@ -125,7 +126,7 @@
         app:layout_constraintBottom_toTopOf="@+id/UpperNibble"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayedAscii"/>
+        app:layout_constraintTop_toBottomOf="@+id/displayedAscii" />
 
     <TextView
         android:id="@+id/displayedCurrentGuess"
@@ -149,5 +150,34 @@
         app:layout_constraintVertical_bias="0.396"
         app:srcCompat="@drawable/table"
         tools:layout_editor_absoluteX="2dp" />
+
+    <TextView
+        android:id="@+id/gameModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ascii"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <TextView
+        android:id="@+id/gameDifficultyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="easy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
