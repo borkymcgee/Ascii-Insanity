@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val button6 = findViewById<Button>(R.id.button6)
         val button7 = findViewById<Button>(R.id.button7)
 
+        //array for display of non-printinch characters
         val nonPrinting:Array<String> = arrayOf("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US", "SP")
 
         //put buttons into array for programmatic assignment
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     2 -> return (0..127).random().toChar()  //ascii expert
                 }
             }
-            return 'X'
+            return 'X' //i should probably catch this somehow
         }
 
         var asciiToGuess = randomTarget()  //random ascii character guess
@@ -74,7 +75,8 @@ class MainActivity : AppCompatActivity() {
             else if(c.code == 127) return "DEL"
             else return c.toString()
         }
-        
+
+        //updates all the text on the display, except for the buttons
         fun updateNumbers() {
             //update the target text, depending on gameMode
             when(gameMode) {
@@ -101,8 +103,8 @@ class MainActivity : AppCompatActivity() {
         gameModeButton.setOnClickListener(){
             if(gameMode >= 2) gameMode = 0
             else gameMode++
-            asciiToGuess = randomTarget()  //random ascii character guess
-
+            //randomize guess so the displayed one is garaunteed to be within the right difficulty
+            asciiToGuess = randomTarget()
             if(difficulty == 2) difficulty = 1
 
             updateNumbers()
@@ -115,11 +117,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 difficulty++
             }
-            asciiToGuess = randomTarget()  //random ascii character guess
+            //randomize guess so the displayed one is garaunteed to be within the right difficulty
+            asciiToGuess = randomTarget()
 
             updateNumbers()
         }
 
+        //on long press of difficulty button, enable expert mode, including non-printing characters in guesses
         gameDifficultyButton.setOnLongClickListener() {
             difficulty = 2
             gameMode = 2
@@ -143,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                 //update current guess display
                 updateNumbers()
 
-                //if the guess is now correct, pop a toast and reset for another char at random
+                //if the guess is now correct, reset for another char at random
                 if(currentGuess == asciiToGuess){
                     //congratulate user
                     //Toast.makeText(getApplicationContext(), "You did it!", Toast.LENGTH_LONG).show()
